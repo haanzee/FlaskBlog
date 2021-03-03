@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/bootstrap.min.css') }}">
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+
+    
+    {% if title %}
+    <title>Flask Blog --{{title}}</title>
+    {% else %}
+    <title> Flask Blog </title>
+    {% endif %}
+
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+            <div class="container">
+                <a class="navbar-brand mr-4" href="/">Haanzee Blog</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav mr-auto">
+                        <a class="nav-item nav-link" href="{{ url_for('home')}}">Home</a>
+                        <a class="nav-item nav-link" href="{{ url_for('home')}}">About</a>
+                        <a class="nav-item nav-link" href="{{ url_for('contactus')}}">Contact Us </a>
+                    </div>
+                    <!-- Navbar Right Side -->
+
+                    <div class="navbar-nav">
+                        {% if current_user.is_authenticated %}
+
+                            <a class="nav-item nav-link" href="#">{{ [ current_user.username ] }}</a>
+                            <a class="nav-item nav-link" href="{{ url_for('new_post')}}">Create Post</a>
+                            <a class="nav-item nav-link" href="{{ url_for('account')}}">Account</a>
+                            <a class="nav-item nav-link" href="{{ url_for('reset_pwd')}}">Change Password</a>
+                            <a class="nav-item nav-link" href="{{ url_for('logout')}}">Logout</a>
+
+                        {% else %}
+
+                            <a class="nav-item nav-link" href="{{ url_for('login')}}">Login</a>
+                            <a class="nav-item nav-link" href="{{ url_for('register')}}">Register</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+            <div class="container">
+                <main role="main" class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        <div class="alert alert-{{ category}}">
+                                            {{message}}       
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            {% block content %}{% endblock %}
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text text-primary">
+                                <h3>Utility</h3>
+                            </div>
+                            <div class="content-section shadow">
+                                <p class='text-muted'>
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-light">Latest Posts</li>
+                                    <li class="list-group-item list-group-item-light">Announcements</li>
+                                    <li class="list-group-item list-group-item-light">Calendars</li>
+                                    <li class="list-group-item list-group-item-light">etc</li>
+                                </ul>
+                                </p>
+                            </div>
+                            <div class="content-section shadow">
+                                <p class='text-muted'>
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-light">Latest Posts</li>
+                                    <li class="list-group-item list-group-item-light">Announcements</li>
+                                    <li class="list-group-item list-group-item-light">Calendars</li>
+                                    <li class="list-group-item list-group-item-light">etc</li>
+                                </ul>
+                                </p>
+                            </div>
+                            <div class="content-section shadow">
+                                <p class='text-muted'>
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-light">Latest Posts</li>
+                                    <li class="list-group-item list-group-item-light">Announcements</li>
+                                    <li class="list-group-item list-group-item-light">Calendars</li>
+                                    <li class="list-group-item list-group-item-light">etc</li>
+                                </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% block footer %}
+                        {% include 'footer.html' %}
+                    {% endblock footer %}
+                </main>
+            </div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{{ url_for('static', filename='vendor/jquery/jquery.slim.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='vendor/js/bootstrap.min.js') }}"></script>
+</body>
+</html>
