@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-os.environ['EMAIL_USER'] = 'haanzee@gmail.com'
-os.environ['EMAIL_PASS'] = 'Jas5454#@'
+os.environ['EMAIL_USER'] = '#'
+os.environ['EMAIL_PASS'] = '#'
 
 
 app = Flask(__name__)
